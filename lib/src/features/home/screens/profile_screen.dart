@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:mine_profile/src/core/utils/telegram_page.dart';
+import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
+import 'package:mine_profile/src/features/home/widgets/change_password_form.dart';
+import 'package:mine_profile/src/features/home/widgets/input_promo_form.dart';
+import 'package:mine_profile/src/features/home/widgets/skin_change_widget.dart';
+
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key, required this.data});
+  final UserData data;
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  Widget build(BuildContext context) {
+    var data = widget.data;
+    return ListView(
+      children: [
+        ListTile(
+          title: Text(data.profile?.username ?? "null"),
+          subtitle: Text("@${data.user?.username ?? "telegram"}"),
+          leading: GestureDetector(
+            child: Image.asset(
+              "assets/default_avatar.png",
+            ),
+            // child: Image.network(
+            //   "http://kissota.ru/profile/${data.user?.username}",
+            //   loadingBuilder: (context, child, loadingProgress) {
+            //     if (loadingProgress == null) return child;
+            //     return SizedBox(
+            //       width: 128,
+            //       height: 128,
+            //       child: CircularProgressIndicator(
+            //         value: loadingProgress.expectedTotalBytes != null
+            //             ? loadingProgress.cumulativeBytesLoaded /
+            //                 loadingProgress.expectedTotalBytes!
+            //             : null,
+            //       ),
+            //     );
+            //   },
+            //   errorBuilder: (context, error, stackTrace) => Image.asset(
+            //     "assets/default_avatar.png",
+            //   ),
+            // ),
+            onTap: () => openTelegramPage(
+              "https://t.me/${data.user?.username ?? "koliy822"}",
+            ),
+          ),
+        ),
+        InputPromoForm(data: widget.data),
+        ChangePasswordForm(data: widget.data),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
+        SkinChangeWidget(data: widget.data),
+      ],
+    );
+  }
+}
