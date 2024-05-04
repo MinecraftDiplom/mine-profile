@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
+import 'package:mine_profile/src/features/auth/models/user.dart';
 
 class TelegramStatisticCard extends StatelessWidget {
   const TelegramStatisticCard(this.user, {super.key});

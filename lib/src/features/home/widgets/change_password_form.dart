@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
+import 'package:mine_profile/src/features/home/models/rive_icons.dart';
 import 'package:mine_profile/src/features/home/widgets/rive/rive_icon.dart';
 
 class ChangePasswordForm extends StatefulWidget {

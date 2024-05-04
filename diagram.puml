@@ -1,0 +1,471 @@
+@startuml
+set namespaceSeparator ::
+
+class "mine_profile::src::app.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::app.dart::MyApp"
+
+abstract class "mine_profile::src::common::theme::app_theme.dart::AppTheme" {
+  {static} -MaterialStatePropertyAll<EdgeInsets> _buttonPadding
+  {static} +IconThemeData iconThemeData
+  {static} +TextButtonThemeData textButtonThemeData
+  {static} +OutlinedButtonThemeData outlinedButtonThemeData
+  {static} +FilledButtonThemeData filledButtonThemeData
+  {static} +ElevatedButtonThemeData elevatedButtonThemeData
+}
+
+"mine_profile::src::common::theme::app_theme.dart::AppTheme" o-- "flutter::src::material::material_state.dart::MaterialStatePropertyAll<EdgeInsets>"
+"mine_profile::src::common::theme::app_theme.dart::AppTheme" o-- "flutter::src::widgets::icon_theme_data.dart::IconThemeData"
+"mine_profile::src::common::theme::app_theme.dart::AppTheme" o-- "flutter::src::material::text_button_theme.dart::TextButtonThemeData"
+"mine_profile::src::common::theme::app_theme.dart::AppTheme" o-- "flutter::src::material::outlined_button_theme.dart::OutlinedButtonThemeData"
+"mine_profile::src::common::theme::app_theme.dart::AppTheme" o-- "flutter::src::material::filled_button_theme.dart::FilledButtonThemeData"
+"mine_profile::src::common::theme::app_theme.dart::AppTheme" o-- "flutter::src::material::elevated_button_theme.dart::ElevatedButtonThemeData"
+
+class "mine_profile::src::common::theme::theme_provider.dart::ThemeProvider" {
+  +ThemeMode themeMode
+  +void changeTheme()
+}
+
+"mine_profile::src::common::theme::theme_provider.dart::ThemeProvider" o-- "flutter::src::material::app.dart::ThemeMode"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "mine_profile::src::common::theme::theme_provider.dart::ThemeProvider"
+
+class "mine_profile::src::features::auth::models::user_data_entity.dart::UserData" {
+  +User? user
+  +Profile? profile
+  +int? code
+  +Map<String, dynamic> toJson()
+  {static} +String serialize()
+  {static} +UserData deserialize()
+}
+
+"mine_profile::src::features::auth::models::user_data_entity.dart::UserData" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::User"
+"mine_profile::src::features::auth::models::user_data_entity.dart::UserData" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::Profile"
+
+class "mine_profile::src::features::auth::models::user_data_entity.dart::User" {
+  +int? id
+  +bool? isBot
+  +String? firstName
+  +String? lastName
+  +String? username
+  +String? languageCode
+  +int? braksCount
+  +Id? iId
+  +Map<String, dynamic> toJson()
+}
+
+"mine_profile::src::features::auth::models::user_data_entity.dart::User" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::Id"
+
+class "mine_profile::src::features::auth::models::user_data_entity.dart::Id" {
+  +int? timestamp
+  +String? date
+  +Map<String, dynamic> toJson()
+}
+
+class "mine_profile::src::features::auth::models::user_data_entity.dart::Profile" {
+  +int? id
+  +String? username
+  +String? password
+  +String? telegramId
+  +String? registerAt
+  +String? subscribeEnd
+  +String? uuid
+  +String? accessToken
+  +String? serverID
+  +Map<String, dynamic> toJson()
+  +Profile copyWith()
+}
+
+class "mine_profile::src::features::auth::screens::code_verification_screen.dart::CodeVerificationScreen" {
+  +String code
+  +State<CodeVerificationScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::auth::screens::code_verification_screen.dart::CodeVerificationScreen"
+
+class "mine_profile::src::features::auth::screens::code_verification_screen.dart::_CodeVerificationScreenState" {
+  +TextEditingController controller
+  +void dispose()
+  +void onNumPressed()
+  +void onClearPressed()
+  +void onDeletePressed()
+  +Widget build()
+}
+
+"mine_profile::src::features::auth::screens::code_verification_screen.dart::_CodeVerificationScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::auth::screens::code_verification_screen.dart::_CodeVerificationScreenState"
+
+class "mine_profile::src::features::auth::screens::sign_in_screen.dart::SignInScreen" {
+  +State<SignInScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::auth::screens::sign_in_screen.dart::SignInScreen"
+
+class "mine_profile::src::features::auth::screens::sign_in_screen.dart::_SignInScreenState" {
+  +TextEditingController usernameController
+  -String _message
+  -void _login()
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"mine_profile::src::features::auth::screens::sign_in_screen.dart::_SignInScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::auth::screens::sign_in_screen.dart::_SignInScreenState"
+
+class "mine_profile::src::features::auth::screens::welcome_screen.dart::WelcomeScreen" {
+  +State<WelcomeScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::auth::screens::welcome_screen.dart::WelcomeScreen"
+
+class "mine_profile::src::features::auth::screens::welcome_screen.dart::_WelcomeScreenState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::auth::screens::welcome_screen.dart::_WelcomeScreenState"
+
+class "mine_profile::src::features::auth::widgets::num_key.dart::NumberKey" {
+  +String? number
+  +void Function(String) onPressed
+  +bool background
+  +IconData? icon
+  +Widget build()
+}
+
+"mine_profile::src::features::auth::widgets::num_key.dart::NumberKey" o-- "null::void Function(String)"
+"mine_profile::src::features::auth::widgets::num_key.dart::NumberKey" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::auth::widgets::num_key.dart::NumberKey"
+
+class "mine_profile::src::features::auth::widgets::num_keyboard.dart::NumKeyboard" {
+  +void Function(String) onNumPressed
+  +void Function() onClearPressed
+  +void Function() onDeletePressed
+  +Widget build()
+}
+
+"mine_profile::src::features::auth::widgets::num_keyboard.dart::NumKeyboard" o-- "null::void Function(String)"
+"mine_profile::src::features::auth::widgets::num_keyboard.dart::NumKeyboard" o-- "null::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::auth::widgets::num_keyboard.dart::NumKeyboard"
+
+class "mine_profile::src::features::home::blocs::form_status.dart::FormStatus" {
+  +int index
+  {static} +List<FormStatus> values
+  {static} +FormStatus initial
+  {static} +FormStatus riveLoading
+  {static} +FormStatus noInfo
+  {static} +FormStatus updating
+  {static} +FormStatus success
+  {static} +FormStatus error
+  {static} +FormStatus unAuth
+}
+
+"mine_profile::src::features::home::blocs::form_status.dart::FormStatus" o-- "mine_profile::src::features::home::blocs::form_status.dart::FormStatus"
+"dart::core::Enum" <|-- "mine_profile::src::features::home::blocs::form_status.dart::FormStatus"
+
+class "mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeCubit" {
+  -HomeUseCase _homeUseCase
+  {static} +FlutterSecureStorage storage
+  +dynamic updateData()
+  +dynamic exit()
+}
+
+"mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeCubit" o-- "mine_profile::src::features::home::use_cases::home_use_case.dart::HomeUseCase"
+"mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeCubit" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+"bloc::src::cubit.dart::Cubit" <|-- "mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeCubit"
+
+class "mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeState" {
+  +UserData? userData
+  +FormStatus formStatus
+  +List<Object?> props
+  +HomeState copyWith()
+}
+
+"mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeState" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::UserData"
+"mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeState" o-- "mine_profile::src::features::home::blocs::form_status.dart::FormStatus"
+"equatable::src::equatable.dart::Equatable" <|-- "mine_profile::src::features::home::blocs::home::home_cubit.dart::HomeState"
+
+class "mine_profile::src::features::home::screens::home_screen.dart::HomeScreen" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::screens::home_screen.dart::HomeScreen"
+
+class "mine_profile::src::features::home::screens::home_screen.dart::HomeView" {
+  +State<HomeView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::screens::home_screen.dart::HomeView"
+
+class "mine_profile::src::features::home::screens::home_screen.dart::_HomeViewState" {
+  -int _selectedIndex
+  +void initState()
+  -void _onItemTapped()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::screens::home_screen.dart::_HomeViewState"
+
+class "mine_profile::src::features::home::screens::profile_screen.dart::ProfileScreen" {
+  +UserData data
+  +State<ProfileScreen> createState()
+}
+
+"mine_profile::src::features::home::screens::profile_screen.dart::ProfileScreen" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::UserData"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::screens::profile_screen.dart::ProfileScreen"
+
+class "mine_profile::src::features::home::screens::profile_screen.dart::_ProfileScreenState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::screens::profile_screen.dart::_ProfileScreenState"
+
+class "mine_profile::src::features::home::screens::statistic_screen.dart::StatisticScreen" {
+  +UserData data
+  +State<StatisticScreen> createState()
+}
+
+"mine_profile::src::features::home::screens::statistic_screen.dart::StatisticScreen" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::UserData"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::screens::statistic_screen.dart::StatisticScreen"
+
+class "mine_profile::src::features::home::screens::statistic_screen.dart::_StatisticScreenState" {
+  -EasyRefreshController _controller
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"mine_profile::src::features::home::screens::statistic_screen.dart::_StatisticScreenState" o-- "easy_refresh::easy_refresh.dart::EasyRefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::screens::statistic_screen.dart::_StatisticScreenState"
+
+class "mine_profile::src::features::home::use_cases::home_use_case.dart::HomeUseCase" {
+  +Dio dio
+  +dynamic call()
+}
+
+"mine_profile::src::features::home::use_cases::home_use_case.dart::HomeUseCase" o-- "dio::src::dio.dart::Dio"
+
+class "mine_profile::src::features::home::widgets::change_password_form.dart::ChangePasswordForm" {
+  +UserData data
+  +State<ChangePasswordForm> createState()
+}
+
+"mine_profile::src::features::home::widgets::change_password_form.dart::ChangePasswordForm" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::UserData"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::widgets::change_password_form.dart::ChangePasswordForm"
+
+class "mine_profile::src::features::home::widgets::change_password_form.dart::_ChangePasswordFormState" {
+  +Dio dio
+  -GlobalKey<FormState> _formKey
+  +TextEditingController passwordController
+  +FocusNode passwordFocusNode
+  -bool _isObscured
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::change_password_form.dart::_ChangePasswordFormState" o-- "dio::src::dio.dart::Dio"
+"mine_profile::src::features::home::widgets::change_password_form.dart::_ChangePasswordFormState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"mine_profile::src::features::home::widgets::change_password_form.dart::_ChangePasswordFormState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"mine_profile::src::features::home::widgets::change_password_form.dart::_ChangePasswordFormState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::widgets::change_password_form.dart::_ChangePasswordFormState"
+
+class "mine_profile::src::features::home::widgets::input_promo_form.dart::InputPromoForm" {
+  +UserData data
+  +State<InputPromoForm> createState()
+}
+
+"mine_profile::src::features::home::widgets::input_promo_form.dart::InputPromoForm" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::UserData"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::widgets::input_promo_form.dart::InputPromoForm"
+
+class "mine_profile::src::features::home::widgets::input_promo_form.dart::_InputPromoFormState" {
+  +Dio dio
+  -GlobalKey<FormState> _formKey
+  +TextEditingController codeController
+  +FocusNode codeFocusNode
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::input_promo_form.dart::_InputPromoFormState" o-- "dio::src::dio.dart::Dio"
+"mine_profile::src::features::home::widgets::input_promo_form.dart::_InputPromoFormState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"mine_profile::src::features::home::widgets::input_promo_form.dart::_InputPromoFormState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"mine_profile::src::features::home::widgets::input_promo_form.dart::_InputPromoFormState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::widgets::input_promo_form.dart::_InputPromoFormState"
+
+class "mine_profile::src::features::home::widgets::profile_menu_widget.dart::ProfileMenuWidget" {
+  +String title
+  +IconData icon
+  +void Function() onPress
+  +bool endIcon
+  +Color? textColor
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::profile_menu_widget.dart::ProfileMenuWidget" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"mine_profile::src::features::home::widgets::profile_menu_widget.dart::ProfileMenuWidget" o-- "dart::ui::void Function()"
+"mine_profile::src::features::home::widgets::profile_menu_widget.dart::ProfileMenuWidget" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::widgets::profile_menu_widget.dart::ProfileMenuWidget"
+
+class "mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcon" {
+  +RiveIcons icon
+  +double? height
+  +double? width
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcon" o-- "mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcons"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcon"
+
+class "mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcons" {
+  +int index
+  {static} +List<RiveIcons> values
+  {static} +RiveIcons globe
+  {static} +RiveIcons lock
+  {static} +RiveIcons gear
+  {static} +RiveIcons ribbon
+  {static} +RiveIcons search
+  {static} +RiveIcons profile
+  {static} +RiveIcons network
+  {static} +RiveIcons notification
+  {static} +RiveIcons location
+  {static} +RiveIcons wallet
+  {static} +RiveIcons calendar
+  {static} +RiveIcons mail
+}
+
+"mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcons" o-- "mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcons"
+"dart::core::Enum" <|-- "mine_profile::src::features::home::widgets::rive::rive_icon.dart::RiveIcons"
+
+class "mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::ArcheryHeader" {
+  +Widget build()
+}
+
+"easy_refresh::easy_refresh.dart::Header" <|-- "mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::ArcheryHeader"
+
+class "mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicator" {
+  +IndicatorState state
+  +bool reverse
+  +State<_ArcheryIndicator> createState()
+}
+
+"mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicator" o-- "easy_refresh::easy_refresh.dart::IndicatorState"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicator"
+
+class "mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState" {
+  +SMINumber? pull
+  +SMITrigger? advance
+  +StateMachineController? controller
+  -RiveFile? _riveFile
+  -double _offset
+  -IndicatorMode _mode
+  -double _actualTriggerOffset
+  +void initState()
+  -void _loadRiveFile()
+  +void dispose()
+  -void _onModeChange()
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState" o-- "rive::src::controllers::state_machine_controller.dart::SMINumber"
+"mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState" o-- "rive::src::controllers::state_machine_controller.dart::SMITrigger"
+"mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState" o-- "rive::src::controllers::state_machine_controller.dart::StateMachineController"
+"mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState" o-- "rive::src::rive_file.dart::RiveFile"
+"mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState" o-- "easy_refresh::easy_refresh.dart::IndicatorMode"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::widgets::rive::rive_loading_widget.dart::_ArcheryIndicatorState"
+
+class "mine_profile::src::features::home::widgets::skin_change_widget.dart::SkinChangeWidget" {
+  +UserData data
+  +State<SkinChangeWidget> createState()
+}
+
+"mine_profile::src::features::home::widgets::skin_change_widget.dart::SkinChangeWidget" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::UserData"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::widgets::skin_change_widget.dart::SkinChangeWidget"
+
+class "mine_profile::src::features::home::widgets::skin_change_widget.dart::_SkinChangeWidgetState" {
+  +Dio dio
+  +Widget? uploadedSkin
+  +Widget? uploadedCloak
+  +Widget updatedSkinImage()
+  +Widget updatedCloakImage()
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::skin_change_widget.dart::_SkinChangeWidgetState" o-- "dio::src::dio.dart::Dio"
+"mine_profile::src::features::home::widgets::skin_change_widget.dart::_SkinChangeWidgetState" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::widgets::skin_change_widget.dart::_SkinChangeWidgetState"
+
+class "mine_profile::src::features::home::widgets::statistic::minecraft_statistic_card.dart::MinecraftStatisticCard" {
+  +Profile profile
+  +Widget build()
+  +String dateFormat()
+  +String subDays()
+}
+
+"mine_profile::src::features::home::widgets::statistic::minecraft_statistic_card.dart::MinecraftStatisticCard" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::Profile"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::widgets::statistic::minecraft_statistic_card.dart::MinecraftStatisticCard"
+
+class "mine_profile::src::features::home::widgets::statistic::servers_info.dart::ServersInfo" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::widgets::statistic::servers_info.dart::ServersInfo"
+
+class "mine_profile::src::features::home::widgets::statistic::server_status.dart::ServerStatus" {
+  +int port
+  +String name
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::widgets::statistic::server_status.dart::ServerStatus"
+
+class "mine_profile::src::features::home::widgets::statistic::telegram_statistic_card.dart::TelegramStatisticCard" {
+  +User user
+  +Widget build()
+}
+
+"mine_profile::src::features::home::widgets::statistic::telegram_statistic_card.dart::TelegramStatisticCard" o-- "mine_profile::src::features::auth::models::user_data_entity.dart::User"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "mine_profile::src::features::home::widgets::statistic::telegram_statistic_card.dart::TelegramStatisticCard"
+
+class "mine_profile::src::features::home::widgets::try_head::SkinHead.dart::SkinHead" {
+  +String skinImageUrl
+  +_SkinHeadState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "mine_profile::src::features::home::widgets::try_head::SkinHead.dart::SkinHead"
+
+class "mine_profile::src::features::home::widgets::try_head::SkinHead.dart::_SkinHeadState" {
+  -Uint8List? _headImage
+  +void initState()
+  -dynamic _loadHeadImage()
+  +Widget build()
+  +dynamic copyCrop()
+}
+
+"mine_profile::src::features::home::widgets::try_head::SkinHead.dart::_SkinHeadState" o-- "dart::typed_data::Uint8List"
+"flutter::src::widgets::framework.dart::State" <|-- "mine_profile::src::features::home::widgets::try_head::SkinHead.dart::_SkinHeadState"
+
+abstract class "mine_profile::src::routes.dart::ScreenRoutes" {
+  {static} +FlutterSecureStorage storage
+  {static} -GoRouter _router
+  {static} +ScreenRoute welcome
+  {static} +ScreenRoute signIn
+  {static} +ScreenRoute verify
+  {static} +ScreenRoute home
+  {static} +GoRouter router
+}
+
+"mine_profile::src::routes.dart::ScreenRoutes" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+"mine_profile::src::routes.dart::ScreenRoutes" o-- "go_router::src::router.dart::GoRouter"
+"mine_profile::src::routes.dart::ScreenRoutes" o-- "mine_profile::src::routes.dart::ScreenRoute"
+
+class "mine_profile::src::routes.dart::ScreenRoute" {
+  +String name
+  +String path
+  +String goPath
+}
+
+
+@enduml

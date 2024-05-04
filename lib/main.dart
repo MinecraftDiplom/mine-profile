@@ -3,10 +3,8 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mine_profile/src/app.dart';
-import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 GetIt getIt = GetIt.instance;
@@ -22,13 +20,13 @@ Future<void> main() async {
   };
 
   await runZonedGuarded(
-      () async {
-        final widgetsBinding = WidgetsFlutterBinding.ensureInitialized()
-          ..deferFirstFrame();
+    () async {
+      final widgetsBinding = WidgetsFlutterBinding.ensureInitialized()
+        ..deferFirstFrame();
 
-        widgetsBinding.allowFirstFrame();
-        runApp(const MyApp());
-      },
+      widgetsBinding.allowFirstFrame();
+      runApp(const MyApp());
+    },
     talker.handle,
   );
 }

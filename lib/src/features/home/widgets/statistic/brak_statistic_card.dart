@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mine_profile/src/features/auth/models/minecraft_profile.dart';
+import 'package:mine_profile/src/features/auth/models/brak.dart';
 import 'package:mine_profile/src/features/home/use_cases/date_format.dart';
 
-class MinecraftStatisticCard extends StatelessWidget {
-  const MinecraftStatisticCard(this.profile, {super.key});
-  final MinecraftProfile profile;
+class BrakStatisticCard extends StatelessWidget {
+  const BrakStatisticCard(this.brak, {super.key});
+  final Brak brak;
 
   @override
   Widget build(BuildContext context) {
@@ -12,44 +12,37 @@ class MinecraftStatisticCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
       child: Card(
         child: ListTile(
-          title: const Text("Minecraft"),
+          title: const Text("Brak"),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 4),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     const Text("uuid"),
-              //     Text(profile.uuid?.toString() ?? "Нет информации"),
-              //   ],
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Никнейм"),
-                  Text(profile.username?.toString() ?? "Нет информации"),
+                  const Text("Первый партнёр"),
+                  Text(brak.firstUser.username ?? "Нет информации"),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Зарегистрирован"),
-                  Text(dateFormat(profile.registerAt)),
+                  const Text("Второй партнёр"),
+                  Text(brak.secondUser.username ?? "Нет информации"),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Подписка до"),
-                  Text(dateFormat(profile.subscribeEnd)),
+                  const Text("Ребёнок"),
+                  Text(brak.baby?.username ?? "Нет"),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Ещё дней действует"),
-                  Text(subDays(profile.subscribeEnd)),
+                  const Text("Дней брака"),
+                  Text(daysFromMillis(brak.time)),
                 ],
               ),
             ],

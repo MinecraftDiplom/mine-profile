@@ -85,7 +85,6 @@ class _ArcheryIndicatorState extends State<_ArcheryIndicator> {
 
   /// Mode change listener.
   void _onModeChange(IndicatorMode mode, double offset) {
-    print(mode);
     switch (mode) {
       case IndicatorMode.drag:
         controller?.isActive = true;
@@ -118,11 +117,6 @@ class _ArcheryIndicatorState extends State<_ArcheryIndicator> {
                   'numberSimulation',
                 )!;
                 // controller?.isActive = false;
-                if (controller == null) {
-                  throw Exception(
-                    'Unable to initialize state machine controller',
-                  );
-                }
                 artboard.addController(controller!);
                 pull = controller!.findInput<double>('pull') as SMINumber;
                 advance = controller!.findInput<bool>('advance') as SMITrigger;

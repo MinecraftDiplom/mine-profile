@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
 
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
-                title: 'Flutter Demo',
+                title: 'MineProfile',
                 // scrollBehavior: ScrollWithoutSplash(),
                 routerConfig: ScreenRoutes.router,
                 themeMode: value.themeMode,

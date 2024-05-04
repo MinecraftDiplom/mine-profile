@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mine_profile/src/core/utils/telegram_page.dart';
 import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
+import 'package:mine_profile/src/features/home/blocs/home/home_cubit.dart';
 import 'package:mine_profile/src/features/home/widgets/change_password_form.dart';
 import 'package:mine_profile/src/features/home/widgets/input_promo_form.dart';
 import 'package:mine_profile/src/features/home/widgets/skin_change_widget.dart';
@@ -56,6 +59,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const Divider(),
         const SizedBox(height: 8),
         SkinChangeWidget(data: widget.data),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, right: 32, left: 32),
+          child: CupertinoButton.filled(
+            onPressed: () {
+              context.read<HomeCubit>().exit();
+            },
+            child: const Text(
+              "Выйти",
+              style: TextStyle(
+                color: Colors.white,
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(1.0, 1.0),
+                    blurRadius: 2.0,
+                    color: Color.fromARGB(165, 0, 0, 0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
       ],
     );
   }

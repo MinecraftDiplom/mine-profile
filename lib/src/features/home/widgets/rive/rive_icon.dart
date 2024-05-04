@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mine_profile/src/features/home/models/rive_icons.dart';
 import 'package:rive/rive.dart';
-
-enum RiveIcons {
-  globe,
-  lock,
-  gear,
-  ribbon,
-  search,
-  profile,
-  network,
-  notification,
-  location,
-  wallet,
-  calendar,
-  mail,
-}
 
 class RiveIcon extends StatelessWidget {
   final RiveIcons icon;
@@ -28,7 +14,7 @@ class RiveIcon extends StatelessWidget {
       height: height ?? 48,
       width: width ?? 48,
       child: RiveAnimation.asset(
-        "assets/animated_icons.riv",
+        'assets/animated_icons.riv',
         artboard: icon.name,
       ),
     );

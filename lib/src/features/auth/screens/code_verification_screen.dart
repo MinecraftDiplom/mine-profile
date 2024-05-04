@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mine_profile/src/core/utils/telegram_page.dart';
+import 'package:mine_profile/src/features/home/models/rive_icons.dart';
 import 'package:mine_profile/src/features/home/widgets/rive/rive_icon.dart';
 import 'package:mine_profile/src/routes.dart';
 import 'package:pinput/pinput.dart';

@@ -1,9 +1,13 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mine_profile/src/features/auth/models/brak.dart';
+import 'package:mine_profile/src/features/auth/models/minecraft_profile.dart';
+import 'package:mine_profile/src/features/auth/models/user.dart';
 import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
 import 'package:mine_profile/src/features/home/blocs/home/home_cubit.dart';
 import 'package:mine_profile/src/features/home/widgets/rive/rive_loading_widget.dart';
+import 'package:mine_profile/src/features/home/widgets/statistic/brak_statistic_card.dart';
 import 'package:mine_profile/src/features/home/widgets/statistic/minecraft_statistic_card.dart';
 import 'package:mine_profile/src/features/home/widgets/statistic/servers_info.dart';
 import 'package:mine_profile/src/features/home/widgets/statistic/telegram_statistic_card.dart';
@@ -59,8 +63,15 @@ class _StatisticScreenState extends State<StatisticScreen> {
             delegate: SliverChildListDelegate(
               [
                 const ServersInfo(),
-                TelegramStatisticCard(widget.data.user ?? User()),
-                MinecraftStatisticCard(widget.data.profile ?? Profile()),
+                TelegramStatisticCard(
+                  widget.data.user ?? User(),
+                ),
+                MinecraftStatisticCard(
+                  widget.data.profile ?? MinecraftProfile(),
+                ),
+                BrakStatisticCard(
+                  widget.data.brak ?? Brak(User(), User()),
+                )
               ],
             ),
           ),
