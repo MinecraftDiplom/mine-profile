@@ -7,6 +7,7 @@ import 'package:mine_profile/src/features/home/blocs/form_status.dart';
 import 'package:mine_profile/src/features/home/blocs/home/home_cubit.dart';
 import 'package:mine_profile/src/features/home/models/rive_icons.dart';
 import 'package:mine_profile/src/features/home/screens/profile_screen.dart';
+import 'package:mine_profile/src/features/home/screens/skin_screen.dart';
 import 'package:mine_profile/src/features/home/screens/statistic_screen.dart';
 import 'package:mine_profile/src/features/home/screens/tree_screen.dart';
 import 'package:mine_profile/src/features/home/use_cases/home_use_case.dart';
@@ -113,8 +114,24 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                   currentAccountPicture: GestureDetector(
-                    child: Image.asset(
-                      "assets/default_avatar.png",
+                    child: Image.network(
+                      "http://kissota.ru:9000/skins/render/head/${data.profile?.username}.png",
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return SizedBox(
+                          width: 128,
+                          height: 128,
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) => Image.asset(
+                        "assets/default_avatar.png",
+                      ),
                     ),
                     onTap: () => openTelegramPage(
                       "https://t.me/${data.user?.username ?? "koliy822"}",
@@ -133,7 +150,7 @@ class _HomeViewState extends State<HomeView> {
                   minLeadingWidth: 32,
                 ),
                 ListTile(
-                  title: const Text('Профиль'),
+                  title: const Text('Скин'),
                   selected: _selectedIndex == 1,
                   onTap: () {
                     _onItemTapped(1);
@@ -143,10 +160,20 @@ class _HomeViewState extends State<HomeView> {
                   minLeadingWidth: 32,
                 ),
                 ListTile(
-                  title: const Text('Древо'),
+                  title: const Text('Профиль'),
                   selected: _selectedIndex == 2,
                   onTap: () {
                     _onItemTapped(2);
+                    Navigator.pop(context);
+                  },
+                  leading: const RiveIcon(RiveIcons.gear),
+                  minLeadingWidth: 32,
+                ),
+                ListTile(
+                  title: const Text('Древо'),
+                  selected: _selectedIndex == 3,
+                  onTap: () {
+                    _onItemTapped(3);
                     Navigator.pop(context);
                   },
                   leading: const RiveIcon(RiveIcons.network),
@@ -156,21 +183,21 @@ class _HomeViewState extends State<HomeView> {
                 const ListTile(title: Text("Ссылки")),
                 ListTile(
                   title: const Text('Подписка'),
-                  selected: _selectedIndex == 3,
+                  selected: _selectedIndex == 4,
                   onTap: () => openTelegramPage("https://t.me/Koliy82Bot"),
                   leading: const RiveIcon(RiveIcons.wallet),
                   minLeadingWidth: 32,
                 ),
                 ListTile(
                   title: const Text('Новости'),
-                  selected: _selectedIndex == 4,
+                  selected: _selectedIndex == 5,
                   onTap: () => openTelegramPage("https://t.me/kissotaru"),
                   leading: const RiveIcon(RiveIcons.notification),
                   minLeadingWidth: 32,
                 ),
                 ListTile(
                   title: const Text('Разработчик'),
-                  selected: _selectedIndex == 5,
+                  selected: _selectedIndex == 6,
                   onTap: () => openTelegramPage("https://t.me/koliy822"),
                   leading: const RiveIcon(RiveIcons.mail),
                   minLeadingWidth: 32,
@@ -184,8 +211,9 @@ class _HomeViewState extends State<HomeView> {
                   : 0,
           body: switch (_selectedIndex) {
             0 => StatisticScreen(data: data),
-            1 => ProfileScreen(data: data),
-            2 => TreeViewScreen(data.user?.id ?? 760723365),
+            1 => SkinScreen(data: data),
+            2 => ProfileScreen(data: data),
+            3 => TreeViewScreen(data.user?.id ?? 760723365),
             _ => throw UnimplementedError(),
           },
         );

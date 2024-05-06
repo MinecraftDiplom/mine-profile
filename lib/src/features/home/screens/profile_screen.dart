@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mine_profile/src/core/utils/telegram_page.dart';
 import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
 import 'package:mine_profile/src/features/home/blocs/home/home_cubit.dart';
 import 'package:mine_profile/src/features/home/widgets/change_password_form.dart';
 import 'package:mine_profile/src/features/home/widgets/input_promo_form.dart';
-import 'package:mine_profile/src/features/home/widgets/skin_change_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.data});
@@ -18,6 +18,16 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     var data = widget.data;
     return ListView(
@@ -26,28 +36,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Text(data.profile?.username ?? "null"),
           subtitle: Text("@${data.user?.username ?? "telegram"}"),
           leading: GestureDetector(
-            child: Image.asset(
-              "assets/default_avatar.png",
+            child: Image.network(
+              "http://kissota.ru:9000/skins/render/face/${data.profile?.username ?? "koliy82"}.png",
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return SizedBox(
+                  width: 128,
+                  height: 128,
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              },
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                "assets/default_avatar.png",
+              ),
             ),
-            // child: Image.network(
-            //   "http://kissota.ru/profile/${data.user?.username}",
-            //   loadingBuilder: (context, child, loadingProgress) {
-            //     if (loadingProgress == null) return child;
-            //     return SizedBox(
-            //       width: 128,
-            //       height: 128,
-            //       child: CircularProgressIndicator(
-            //         value: loadingProgress.expectedTotalBytes != null
-            //             ? loadingProgress.cumulativeBytesLoaded /
-            //                 loadingProgress.expectedTotalBytes!
-            //             : null,
-            //       ),
-            //     );
-            //   },
-            //   errorBuilder: (context, error, stackTrace) => Image.asset(
-            //     "assets/default_avatar.png",
-            //   ),
-            // ),
             onTap: () => openTelegramPage(
               "https://t.me/${data.user?.username ?? "koliy822"}",
             ),
@@ -56,9 +63,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         InputPromoForm(data: widget.data),
         ChangePasswordForm(data: widget.data),
         const SizedBox(height: 8),
-        const Divider(),
-        const SizedBox(height: 8),
-        SkinChangeWidget(data: widget.data),
         Padding(
           padding: const EdgeInsets.only(top: 16, right: 32, left: 32),
           child: CupertinoButton.filled(

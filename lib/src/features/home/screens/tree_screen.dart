@@ -118,8 +118,8 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
         return InteractiveViewer(
           constrained: false,
           boundaryMargin: const EdgeInsets.all(100),
-          minScale: 0.01,
-          maxScale: 2,
+          minScale: 0.005,
+          maxScale: 4,
           child: GraphView(
             graph: graph,
             algorithm: BuchheimWalkerAlgorithm(

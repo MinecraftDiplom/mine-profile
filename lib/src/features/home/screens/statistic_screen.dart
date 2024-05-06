@@ -1,5 +1,6 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mine_profile/src/features/auth/models/brak.dart';
 import 'package:mine_profile/src/features/auth/models/minecraft_profile.dart';
@@ -25,11 +26,17 @@ class _StatisticScreenState extends State<StatisticScreen> {
 
   @override
   void initState() {
-    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     _controller = EasyRefreshController(
       controlFinishRefresh: true,
       controlFinishLoad: true,
     );
+    super.initState();
   }
 
   @override
