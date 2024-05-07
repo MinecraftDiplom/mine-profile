@@ -26,6 +26,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
 
   @override
   void initState() {
+    context.read<HomeCubit>().setDrawerSliding(true);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,

@@ -115,7 +115,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   currentAccountPicture: GestureDetector(
                     child: Image.network(
-                      "http://kissota.ru:9000/skins/render/head/${data.profile?.username}.png",
+                      "http://kissota.ru:9000/skins/render/head/${data.profile?.username}",
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return SizedBox(
@@ -205,10 +205,12 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           ),
-          drawerEdgeDragWidth:
-              (MediaQuery.of(context).orientation == Orientation.portrait)
-                  ? MediaQuery.of(context).size.width
-                  : 0,
+          drawerEdgeDragWidth: (context.read<HomeCubit>().isDrawerSliding)
+              ? MediaQuery.of(context).size.width
+              : 0,
+          // (MediaQuery.of(context).orientation == Orientation.portrait)
+          //     ? MediaQuery.of(context).size.width
+          //     : 0,
           body: switch (_selectedIndex) {
             0 => StatisticScreen(data: data),
             1 => SkinScreen(data: data),

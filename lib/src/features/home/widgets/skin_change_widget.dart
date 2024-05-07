@@ -29,7 +29,7 @@ class _SkinChangeWidgetState extends State<SkinChangeWidget> {
           children: [
             const Text("Нет скина"),
             const SizedBox(height: 8),
-            Image.asset("assets/default_skin.png")
+            Image.asset("assets/error_skin.png")
           ],
         );
       },
@@ -57,7 +57,7 @@ class _SkinChangeWidgetState extends State<SkinChangeWidget> {
           children: [
             const Text("Нет скина"),
             const SizedBox(height: 8),
-            Image.asset("assets/default_skin.png")
+            Image.asset("assets/error_skin.png")
           ],
         );
       },

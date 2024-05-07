@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
+import 'package:mine_profile/src/features/home/blocs/home/home_cubit.dart';
 import 'package:mine_profile/src/features/home/models/rive_icons.dart';
 import 'package:mine_profile/src/features/home/widgets/rive/rive_icon.dart';
 
@@ -92,6 +94,7 @@ class _InputPromoFormState extends State<InputPromoForm> {
                       content: Text(request.data.toString()),
                     ),
                   );
+                  context.read<HomeCubit>().updateData();
                 }
                 setState(() {});
               }

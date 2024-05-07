@@ -12,10 +12,18 @@ class HomeCubit extends Cubit<HomeState> {
   final HomeUseCase _homeUseCase;
   static const storage = FlutterSecureStorage();
 
+  bool isDrawerSliding = true;
+
   HomeCubit({
     required HomeUseCase homeUseCase,
   })  : _homeUseCase = homeUseCase,
         super(const HomeState());
+
+  void setDrawerSliding(bool mode) {
+    emit(state.copyWith(formStatus: FormStatus.updating));
+    isDrawerSliding = mode;
+    emit(state.copyWith(formStatus: FormStatus.success));
+  }
 
   Future<void> updateData() async {
     emit(state.copyWith(formStatus: FormStatus.initial));
