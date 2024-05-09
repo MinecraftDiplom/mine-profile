@@ -21,14 +21,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     context.read<HomeCubit>().setDrawerSliding(true);
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     var data = widget.data;
     return ListView(
@@ -38,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           subtitle: Text("@${data.user?.username ?? "telegram"}"),
           leading: GestureDetector(
             child: Image.network(
-              "http://kissota.ru:9000/skins/render/face/${data.profile?.username ?? "koliy82"}.png",
+              "http://kissota.ru:9000/skins/render/face/${data.profile?.username ?? "koliy82"}",
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
                 return SizedBox(
