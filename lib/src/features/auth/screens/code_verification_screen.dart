@@ -56,12 +56,15 @@ class _CodeVerificationScreenState extends State<CodeVerificationScreen> {
           children: [
             GestureDetector(
               onTap: () => openTelegramPage("https://t.me/MineProfileCodeBot"),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RiveIcon(RiveIcons.notification),
-                  SizedBox(width: 8),
-                  Text(
+                  RiveIcon(
+                    RiveIcons.notification,
+                    isActive: true,
+                  ),
+                  const SizedBox(width: 8),
+                  const Text(
                     "Введите код из Telegram-бота",
                     style: TextStyle(fontSize: 16),
                   ),
