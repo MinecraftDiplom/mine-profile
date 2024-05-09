@@ -45,10 +45,13 @@ class _InputPromoFormState extends State<InputPromoForm> {
               keyboardType: TextInputType.visiblePassword,
               focusNode: codeFocusNode,
               controller: codeController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: "Промокод",
-                icon: RiveIcon(RiveIcons.ribbon),
-                label: Text('Promocode'),
+                icon: RiveIcon(
+                  RiveIcons.ribbon,
+                  isActive: true,
+                ),
+                label: const Text('Promocode'),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
