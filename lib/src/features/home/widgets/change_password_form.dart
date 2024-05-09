@@ -57,7 +57,10 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                   },
                 ),
                 hintText: "New Password",
-                icon: const RiveIcon(RiveIcons.lock),
+                icon: RiveIcon(
+                  RiveIcons.lock,
+                  isActive: true,
+                ),
                 label: const Text('Minecraft Password'),
               ),
               validator: (value) {

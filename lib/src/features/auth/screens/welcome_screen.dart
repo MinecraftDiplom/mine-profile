@@ -31,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final theme = context.theme;
     return Theme(
       data: theme.copyWith(
-        textTheme: GoogleFonts.notoSansMonoTextTheme(theme.textTheme),
+        textTheme: GoogleFonts.jetBrainsMonoTextTheme(theme.textTheme),
       ),
       child: Scaffold(
         body: Padding(

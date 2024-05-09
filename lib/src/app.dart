@@ -54,10 +54,10 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   colorScheme: lightColorScheme,
                   iconTheme: AppTheme.iconThemeData,
-                  textTheme: GoogleFonts.notoSansTextTheme().copyWith(
-                    headlineLarge: GoogleFonts.inconsolata(),
-                    headlineMedium: GoogleFonts.inconsolata(),
-                    headlineSmall: GoogleFonts.inconsolata(),
+                  textTheme: GoogleFonts.playTextTheme().copyWith(
+                    headlineLarge: GoogleFonts.play(),
+                    headlineMedium: GoogleFonts.play(),
+                    headlineSmall: GoogleFonts.play(),
                   ),
                   textButtonTheme: AppTheme.textButtonThemeData,
                   outlinedButtonTheme: AppTheme.outlinedButtonThemeData,
