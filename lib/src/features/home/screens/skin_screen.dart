@@ -119,8 +119,6 @@ class _SkinScreenState extends State<SkinScreen> {
   void initState() {
     context.read<HomeCubit>().setDrawerSliding(true);
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);

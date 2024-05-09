@@ -44,6 +44,7 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
 
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     builder
       ..siblingSeparation = (100)
       ..levelSeparation = (150)
@@ -105,8 +106,6 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
         }
         return LayoutBuilder(
           builder: (context, constraints) {
-            WidgetsBinding.instance
-                .addPostFrameCallback((_) => _insertOverlay(context));
             return InteractiveViewer(
               constrained: false,
               boundaryMargin: const EdgeInsets.all(100),
@@ -132,48 +131,6 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
           },
         );
       },
-    );
-  }
-
-  void _insertOverlay(BuildContext context) {
-    return Overlay.of(context).insert(
-      OverlayEntry(builder: (context) {
-        final size = MediaQuery.of(context).size;
-        return Positioned(
-          width: 56,
-          height: 56,
-          top: size.height - 72,
-          left: size.width - 72,
-          child: Material(
-            color: Colors.transparent,
-            child: GestureDetector(
-              onTap: () {
-                if (MediaQuery.of(context).orientation ==
-                    Orientation.portrait) {
-                  SystemChrome.setPreferredOrientations([
-                    DeviceOrientation.landscapeRight,
-                    DeviceOrientation.landscapeLeft,
-                  ]);
-                } else {
-                  SystemChrome.setPreferredOrientations([
-                    DeviceOrientation.landscapeRight,
-                    DeviceOrientation.landscapeLeft,
-                    DeviceOrientation.portraitUp,
-                    DeviceOrientation.portraitDown,
-                  ]);
-                }
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blueGrey,
-                ),
-                child: const Icon(Icons.rotate_left),
-              ),
-            ),
-          ),
-        );
-      }),
     );
   }
 }
