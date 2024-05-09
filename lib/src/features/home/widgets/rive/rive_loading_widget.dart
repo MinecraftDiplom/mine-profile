@@ -65,7 +65,7 @@ class _ArcheryIndicatorState extends State<_ArcheryIndicator> {
 
   RiveFile? _riveFile;
   void _loadRiveFile() {
-    rootBundle.load('assets/refresh.riv').then(
+    rootBundle.load('assets/rive/refresh.riv').then(
       (data) async {
         // Load the RiveFile from the binary data.
         setState(() {
