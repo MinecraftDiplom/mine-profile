@@ -7,6 +7,7 @@ import 'package:mine_profile/src/features/auth/models/minecraft_profile.dart';
 import 'package:mine_profile/src/features/auth/models/user.dart';
 import 'package:mine_profile/src/features/auth/models/user_data_entity.dart';
 import 'package:mine_profile/src/features/home/blocs/home/home_cubit.dart';
+import 'package:mine_profile/src/features/home/models/server_data.dart';
 import 'package:mine_profile/src/features/home/widgets/rive/rive_loading_widget.dart';
 import 'package:mine_profile/src/features/home/widgets/statistic/brak_statistic_card.dart';
 import 'package:mine_profile/src/features/home/widgets/statistic/minecraft_statistic_card.dart';
@@ -14,8 +15,14 @@ import 'package:mine_profile/src/features/home/widgets/statistic/servers_info.da
 import 'package:mine_profile/src/features/home/widgets/statistic/telegram_statistic_card.dart';
 
 class StatisticScreen extends StatefulWidget {
-  const StatisticScreen({super.key, required this.data});
+  const StatisticScreen(
+      {super.key,
+      required this.data,
+      required this.gameServer,
+      required this.techServer});
   final UserData data;
+  final ServerData? gameServer;
+  final ServerData? techServer;
 
   @override
   State<StatisticScreen> createState() => _StatisticScreenState();
@@ -28,8 +35,6 @@ class _StatisticScreenState extends State<StatisticScreen> {
   void initState() {
     context.read<HomeCubit>().setDrawerSliding(true);
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
@@ -70,7 +75,10 @@ class _StatisticScreenState extends State<StatisticScreen> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                const ServersInfo(),
+                ServersInfo(
+                  gameServer: widget.gameServer,
+                  techServer: widget.techServer,
+                ),
                 TelegramStatisticCard(
                   widget.data.user ?? User(),
                 ),
@@ -79,7 +87,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                 ),
                 BrakStatisticCard(
                   widget.data.brak ?? Brak(User(), User()),
-                )
+                ),
               ],
             ),
           ),
