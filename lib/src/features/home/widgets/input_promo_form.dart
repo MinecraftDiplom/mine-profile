@@ -50,6 +50,8 @@ class _InputPromoFormState extends State<InputPromoForm> {
                 icon: RiveIcon(
                   RiveIcons.ribbon,
                   isActive: true,
+                  height: 42,
+                  width: 42,
                 ),
                 label: const Text('Promocode'),
               ),
