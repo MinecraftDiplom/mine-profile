@@ -42,14 +42,22 @@ class MinecraftStatisticCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text("Подписка до"),
-                  Text(dateFormat(profile.subscribeEnd)),
+                  Text(
+                    profile.subscribeEnd == null
+                        ? "Нет подписки"
+                        : dateFormat(profile.subscribeEnd),
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text("Ещё дней действует"),
-                  Text(subDays(profile.subscribeEnd)),
+                  Text(
+                    profile.subscribeEnd == null
+                        ? "0"
+                        : dateFormat(profile.subscribeEnd),
+                  ),
                 ],
               ),
             ],

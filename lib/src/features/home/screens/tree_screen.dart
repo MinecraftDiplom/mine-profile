@@ -35,7 +35,10 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
             BoxShadow(color: Colors.blueGrey, spreadRadius: 1),
           ],
         ),
-        child: Text('${user.username}'),
+        child: Text(
+          '${user.username}',
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

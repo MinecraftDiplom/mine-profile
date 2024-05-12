@@ -60,6 +60,8 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                 icon: RiveIcon(
                   RiveIcons.lock,
                   isActive: true,
+                  height: 42,
+                  width: 42,
                 ),
                 label: const Text('Minecraft Password'),
               ),

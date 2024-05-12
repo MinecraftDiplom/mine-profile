@@ -4,7 +4,8 @@
     <application
         android:label="MineProfile"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+		android:roundIcon="@mipmap/ic_launcher_rounded">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -46,6 +47,10 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="mailto" />
         </intent>
         <package android:name="org.telegram.messenger" />
     </queries>

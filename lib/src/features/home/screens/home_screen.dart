@@ -127,7 +127,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     currentAccountPicture: GestureDetector(
                       child: Image.network(
-                        "http://kissota.ru:9000/skins/render/head/${data.profile?.username}",
+                        "http://kissota.ru:9000/skins/render/head/${data.profile?.username ?? "koliy82"}",
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
                           return SizedBox(
@@ -250,7 +250,8 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     selected: _selectedIndex == 4,
-                    onTap: () => openTelegramPage("https://t.me/Koliy82Bot"),
+                    onTap: () async =>
+                        await openTelegramPage("https://t.me/Koliy82Bot"),
                     leading: RiveIcon(
                       RiveIcons.wallet,
                       isActive: true,
@@ -265,7 +266,8 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     selected: _selectedIndex == 5,
-                    onTap: () => openTelegramPage("https://t.me/kissotaru"),
+                    onTap: () async =>
+                        await openTelegramPage("https://t.me/kissotaru"),
                     leading: RiveIcon(
                       RiveIcons.notification,
                       isActive: true,
@@ -274,13 +276,13 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   ListTile(
                     title: const Text(
-                      'Разработчик',
+                      'Поддержка',
                       style: TextStyle(
                         fontSize: 17,
                       ),
                     ),
                     selected: _selectedIndex == 6,
-                    onTap: () => openTelegramPage("https://t.me/koliy822"),
+                    onTap: () async => await launchSupportMail(),
                     leading: RiveIcon(
                       RiveIcons.mail,
                       isActive: true,

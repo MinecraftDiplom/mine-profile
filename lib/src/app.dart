@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
             ) {
               final theme = context.theme;
               const labelColor = Color(0xFF8b8b8b);
-
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
                 title: 'MineProfile',
@@ -53,7 +52,9 @@ class MyApp extends StatelessWidget {
                 themeMode: value.themeMode,
                 theme: ThemeData(
                   colorScheme: lightColorScheme,
-                  iconTheme: AppTheme.iconThemeData,
+                  iconTheme: AppTheme.iconThemeData.copyWith(
+                    color: theme.colorScheme.surface,
+                  ),
                   textTheme: GoogleFonts.playTextTheme().copyWith(
                     headlineLarge: GoogleFonts.play(),
                     headlineMedium: GoogleFonts.play(),
