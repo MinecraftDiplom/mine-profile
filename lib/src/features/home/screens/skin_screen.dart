@@ -28,7 +28,7 @@ class _SkinScreenState extends State<SkinScreen> {
 
   Widget firstUpdatedSkinImage() {
     firstUploadedSkin ??= Image.network(
-      "http://kissota.ru:9000/skins/render/fullbodyiso/${widget.data.profile?.username ?? "koliy82"}",
+      "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}",
       errorBuilder: (context, error, stackTrace) {
         return Image.asset("assets/error_skin.png");
       },
@@ -50,7 +50,7 @@ class _SkinScreenState extends State<SkinScreen> {
 
   Widget secondUpdatedSkinImage() {
     secondUploadedSkin ??= Image.network(
-      "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}",
+      "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}?y=160",
       errorBuilder: (context, error, stackTrace) {
         return Image.asset("assets/error_skin.png");
       },
@@ -246,30 +246,30 @@ class _SkinScreenState extends State<SkinScreen> {
 
   Future<void> update() async {
     try {
-      Uint8List firstSkinBytes = (await NetworkAssetBundle(Uri.parse(
-                  "http://kissota.ru:9000/skins/render/fullbodyiso/${widget.data.profile?.username ?? "koliy82"}"))
-              .load(
-                  "http://kissota.ru:9000/skins/render/fullbodyiso/${widget.data.profile?.username ?? "koliy82"}"))
-          .buffer
-          .asUint8List();
-      Uint8List secondSkinBytes = (await NetworkAssetBundle(Uri.parse(
-                  "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}"))
-              .load(
-                  "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}"))
-          .buffer
-          .asUint8List();
-      Uint8List avatarBytes = (await NetworkAssetBundle(Uri.parse(
-                  "http://kissota.ru:9000/skins/render/face/${widget.data.profile?.username ?? "koliy82"}"))
-              .load(
-                  "http://kissota.ru:9000/skins/render/face/${widget.data.profile?.username ?? "koliy82"}"))
-          .buffer
-          .asUint8List();
-      Uint8List cloakBytes = (await NetworkAssetBundle(Uri.parse(
-                  "http://kissota.ru:9000/cloaks/${widget.data.profile?.username ?? "koliy82"}"))
-              .load(
-                  "http://kissota.ru:9000/cloaks/${widget.data.profile?.username ?? "koliy82"}"))
-          .buffer
-          .asUint8List();
+      String fSkinURL =
+          "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}";
+      String sSkinURL =
+          "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}?y=160";
+      String avatarURL =
+          "http://kissota.ru:9000/skins/render/face/${widget.data.profile?.username ?? "koliy82"}";
+      String cloakURL =
+          "http://kissota.ru:9000/cloaks/${widget.data.profile?.username ?? "koliy82"}";
+      Uint8List firstSkinBytes =
+          (await NetworkAssetBundle(Uri.parse(fSkinURL)).load(fSkinURL))
+              .buffer
+              .asUint8List();
+      Uint8List secondSkinBytes =
+          (await NetworkAssetBundle(Uri.parse(sSkinURL)).load(sSkinURL))
+              .buffer
+              .asUint8List();
+      Uint8List avatarBytes =
+          (await NetworkAssetBundle(Uri.parse(avatarURL)).load(avatarURL))
+              .buffer
+              .asUint8List();
+      Uint8List cloakBytes =
+          (await NetworkAssetBundle(Uri.parse(cloakURL)).load(cloakURL))
+              .buffer
+              .asUint8List();
 
       firstUploadedSkin = Image.memory(firstSkinBytes);
       secondUploadedSkin = Image.memory(secondSkinBytes);
@@ -348,24 +348,24 @@ class _SkinScreenState extends State<SkinScreen> {
               const SnackBar(content: CircularProgressIndicator()),
             );
             await Future.delayed(const Duration(seconds: 1));
-            Uint8List firstSkinBytes = (await NetworkAssetBundle(Uri.parse(
-                        "http://kissota.ru:9000/skins/render/fullbodyiso/${widget.data.profile?.username ?? "koliy82"}"))
-                    .load(
-                        "http://kissota.ru:9000/skins/render/fullbodyiso/${widget.data.profile?.username ?? "koliy82"}"))
-                .buffer
-                .asUint8List();
-            Uint8List secondSkinBytes = (await NetworkAssetBundle(Uri.parse(
-                        "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}"))
-                    .load(
-                        "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}"))
-                .buffer
-                .asUint8List();
-            Uint8List avatarBytes = (await NetworkAssetBundle(Uri.parse(
-                        "http://kissota.ru:9000/skins/render/face/${widget.data.profile?.username ?? "koliy82"}"))
-                    .load(
-                        "http://kissota.ru:9000/skins/render/face/${widget.data.profile?.username ?? "koliy82"}"))
-                .buffer
-                .asUint8List();
+            String fSkinURL =
+                "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}";
+            String sSkinURL =
+                "http://kissota.ru:9000/skins/render/fullbody/${widget.data.profile?.username ?? "koliy82"}?y=160";
+            String avatarURL =
+                "http://kissota.ru:9000/skins/render/face/${widget.data.profile?.username ?? "koliy82"}";
+            Uint8List firstSkinBytes =
+                (await NetworkAssetBundle(Uri.parse(fSkinURL)).load(fSkinURL))
+                    .buffer
+                    .asUint8List();
+            Uint8List secondSkinBytes =
+                (await NetworkAssetBundle(Uri.parse(sSkinURL)).load(sSkinURL))
+                    .buffer
+                    .asUint8List();
+            Uint8List avatarBytes =
+                (await NetworkAssetBundle(Uri.parse(avatarURL)).load(avatarURL))
+                    .buffer
+                    .asUint8List();
 
             firstUploadedSkin = Image.memory(firstSkinBytes);
             secondUploadedSkin = Image.memory(secondSkinBytes);
@@ -378,13 +378,7 @@ class _SkinScreenState extends State<SkinScreen> {
               const SnackBar(content: CircularProgressIndicator()),
             );
             await Future.delayed(const Duration(seconds: 1));
-            Uint8List cloakBytes = (await NetworkAssetBundle(Uri.parse(
-                        "http://kissota.ru:9000/cloaks/${widget.data.profile?.username ?? "koliy82"}"))
-                    .load(
-                        "http://kissota.ru:9000/cloaks/${widget.data.profile?.username ?? "koliy82"}"))
-                .buffer
-                .asUint8List();
-            uploadedCloak = Image.memory(cloakBytes);
+            await update();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Плащ успешно обновлён")),
             );
