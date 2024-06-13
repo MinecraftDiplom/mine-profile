@@ -23,6 +23,7 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
   BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
   final dio = Dio();
   HashMap<int, User> users = HashMap();
+  var nodeId = 1;
 
   Widget rectangleWidget(User user) {
     return InkWell(
@@ -43,8 +44,6 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
     );
   }
 
-  var nodeId = 1;
-
   @override
   void initState() {
     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
@@ -61,7 +60,7 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
   Future<FamilyTree> get() async {
     try {
       final response =
-          await dio.get('http://kissota.ru:9000/tree/${widget.id}');
+          await dio.get('http://194.9.6.98:9000/tree/${widget.id}');
       var data = FamilyTree.fromJson(response.data);
       return data;
     } on ArgumentError catch (error) {
@@ -81,12 +80,22 @@ class _TreeViewScreenState extends State<TreeViewScreen> {
     buildTreeRecursive(tree.right, node, true);
   }
 
+  // HashMap<int, bool> fixMap = HashMap();
+
   void buildTreeRecursive(FamilyTree? tree, Node core, bool hasRight) {
     if (tree != null) {
       final node = Node.Id(nodeId);
       var paint = Paint()..strokeWidth = 2;
-      graph.addEdge(core, node,
-          paint: paint..color = hasRight ? Colors.blue : Colors.redAccent);
+      graph.addEdge(
+        core,
+        node,
+        paint: paint..color = hasRight ? Colors.blue : Colors.redAccent,
+      );
+
+      // int checkId = tree.value?.id ?? -1;
+      // if (fixMap[checkId] == true) return;
+      // fixMap[checkId] = true;
+
       users[nodeId] = tree.value ?? User();
       nodeId++;
       buildTreeRecursive(tree.left, node, false);
